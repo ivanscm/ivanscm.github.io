@@ -1,0 +1,45 @@
+{{ define "breadcrumb" }}
+    <li class="breadcrumb-item roboto font-weight-light"><a href="/translates/">Переводы</a></li>
+    <li class="breadcrumb-item roboto font-weight-light active" aria-current="page">{{ .Title }}</li>
+{{ end }}
+
+{{ define "main" }}
+    <article class="pb-2">
+        <h2 class="roboto text-dark article-title">{{ .Title }}</h2>
+        <div class="pt-2">
+            <div class="roboto text-dark article-content">
+                {{ $paginator := .Paginate (where .Pages "Type" "translates") }}
+                {{ range $paginator.Pages }}
+                {{ partial "summary-translate.html" . }}
+                {{ end }}
+                {{- partial "pagination.html" . -}}
+                {{ .Content }}
+
+                {{ $children := (where .Pages "Type" "translate") }}
+                {{ if $children }}
+                    <div id="child-pages" class="pt-2">
+                        <hr/>
+                        <strong class="roboto">Дочерние страницы:</strong>
+                        <ul class="list pt-2">
+                            {{ range (where .Pages "Type" "translate") }}
+                            <li><a href="{{ .Permalink }}" class="text-decoration-none text-dark">{{ .Title }}</a></li>
+                            {{ end }}
+                        </ul>
+                    </div>
+                {{ end }}
+            </div>
+        </div>
+    </article>
+    <div class="pb-2"> Поделиться:
+        <script src="https://yastatic.net/es5-shims/0.0.2/es5-shims.min.js"></script>
+        <script src="https://yastatic.net/share2/share.js"></script>
+        <div class="ya-share2" data-services="vkontakte,facebook,twitter,lj,pocket,telegram">
+        </div>
+    </div>
+    {{ if $children }}
+    <hr />
+    <div class="pt-5">
+        {{ template "_internal/disqus.html" . }}
+    </div>
+    {{ end }}
+{{ end }}

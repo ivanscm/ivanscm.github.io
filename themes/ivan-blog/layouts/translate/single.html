@@ -1,0 +1,33 @@
+{{ define "breadcrumb" }}
+    <li class="breadcrumb-item roboto font-weight-light"><a href="/translates/">Переводы</a></li>
+    <li class="breadcrumb-item roboto font-weight-light"><a href="{{ .Page.Parent.Permalink}}">{{ .Page.Parent.Title}}</a></li>
+    <li class="breadcrumb-item roboto font-weight-light active" aria-current="page">{{.Title}}
+{{ end }}
+
+{{ define "main" }}
+    <article class="pb-2">
+        <h2 class="roboto text-dark article-title">{{ .Title }}</h2>
+        <div class="pt-2">
+            <div class="roboto text-dark article-content">
+                {{ .Content }}
+            </div>
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <ins class="adsbygoogle" style="display:block; text-align:center;"
+                data-ad-layout="in-article" data-ad-format="fluid"
+                data-ad-client="ca-pub-8696069970262487" data-ad-slot="9843555029"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+    </article>
+    <div class="pb-2"> Поделиться:
+        <script src="https://yastatic.net/es5-shims/0.0.2/es5-shims.min.js"></script>
+        <script src="https://yastatic.net/share2/share.js"></script>
+        <div class="ya-share2" data-services="vkontakte,facebook,twitter,lj,pocket,telegram">
+        </div>
+    </div>
+    <hr />
+    <div class="pt-5">
+        {{ template "_internal/disqus.html" . }}
+    </div>
+{{ end }}

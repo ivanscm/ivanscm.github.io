@@ -1,0 +1,43 @@
+{{ define "breadcrumb" }}
+<li class="breadcrumb-item roboto font-weight-light"><a href="/books/">Библиотека</a></li>
+    <li class="breadcrumb-item roboto font-weight-light active" aria-current="page">{{.Title}}</li>
+{{ end }}
+
+{{ define "main" }}
+<div class="row">
+    {{ if .Params.cover }}
+    {{ $cover := (trim .Params.cover "/") }}
+    <div class="col-md-4 col-sm-12">
+        <img src="{{ $cover }}" class="img-fluid img-thumbnail"/>
+    </div>
+    {{ end }}
+    <div class="{{ if .Params.cover }}col-md-8{{ else }}col-md-12{{ end }}">
+        <h2 class="roboto text-dark article-title">{{.Title}}</h2>
+        {{ partial "badge-book-status.html" . }}
+        <br/>
+        <p>Автор{{if gt (len .Params.authors) 1}}ы{{end}}: <strong>{{ delimit .Params.authors ", " }}</strong>
+            {{ if .Params.translates }}
+                <br/>
+                Перевод: {{ delimit .Params.translates ", " }}
+            {{ end }}
+            {{ if .Params.isbn }}
+                <br/>
+                ISBN: {{ .Params.isbn }}
+            {{ end }}
+        </p>
+        {{ if .Params.links }}
+            {{ $linksHtml := slice}}
+            {{ range .Params.links }}
+                {{ $link := print "<a href=\"" .link "\" target=\"_blank\">" .title "</a>"}}
+                {{ $linksHtml = append $link $linksHtml }}
+            {{ end }}
+        <p>
+            Купить: {{ delimit $linksHtml ", " }}
+        </p>
+        {{ end }}
+    </div>
+    <div class="pt-4 col-md-12 roboto text-dark article-content">
+        {{ .Content }}
+    </div>
+</div>
+{{ end }}

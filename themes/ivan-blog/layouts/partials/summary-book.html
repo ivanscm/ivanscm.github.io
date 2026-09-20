@@ -1,0 +1,24 @@
+<div class="card">
+    {{ if .Params.cover }}
+        {{ $cover := (trim .Params.cover "/") }}
+        <a href="{{.Permalink}}">
+            <img src="{{ $cover }}" class="card-img-top" alt="image from {{ .Title }}">
+        </a>
+    {{ end }}
+    <div class="card-body">
+      <h5 class="card-title">{{ .Title }}</h5>
+      <p class="card-text">
+        {{ partial "badge-book-status.html" . }}
+      </p>
+      <p class="card-text">
+        {{ if .Params.isbn }}
+            ISBN: {{ .Params.isbn }}
+            <br/>
+        {{ end }}
+        <small>{{ delimit .Params.authors ", " }}</small>
+      </p>
+    </div>
+    <div class="card-footer">
+        <small class="text-muted">{{ partial "date.html" . }}</small>
+    </div>
+</div>

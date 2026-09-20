@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    {{- partial "head.html" . -}}
+    <body>
+        {{- partial "header.html" . -}}
+            <div class="container pt-5">
+                <div class="row">
+                    <div class="col-md-3 order-1">
+                        {{- partial "sidebar.html" . -}}
+                    </div>
+                    <div class="col-md-8 offset-md-1 pb-5 order-md-12">
+                        {{ if not .IsHome }}
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb bg-light">
+                                    <li class="breadcrumb-item roboto font-weight-light"><a href="/"><img src="images/emoji/house.png" alt="🏠" style="height: 16px; vertical-align:text-top"/></a></li>
+                                    {{- block "breadcrumb" . }}{{- end }}
+                                </ol>
+                            </nav>
+                        {{ end }}
+                        {{- block "main" . }}{{- end }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{- partial "footer.html" . -}}
+    </body>
+</html>

@@ -1,0 +1,17 @@
+{{ $github := .Params.github }}
+<article class="pb-5">
+    <h2 class="roboto">
+        <a href="{{.Permalink}}" class="text-decoration-none text-dark">
+            {{ .Title }}
+        </a>
+    </h2>
+    {{ if .Params.github }}
+    <a href="{{ $github }}" target="_blank">GitHub</a>
+    {{ end }}
+    <div class="pt-2">
+        <div class="roboto text-dark">
+            {{ .Description }}
+        </div>
+        <a href="{{.Permalink}}" class="text-decoration-none text-dark">К переводу...</a>
+    </div>
+</article>

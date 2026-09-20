@@ -1,0 +1,32 @@
+{{ $featured_image := .Params.featured_image }}
+<article class="pb-5">
+    <h2 class="roboto">
+        <a href="{{.Permalink}}" class="text-decoration-none text-dark">
+            {{ .Title }}
+        </a>
+    </h2>
+    <ul class="list-inline">
+        <li class="list-inline-item roboto font-weight-light">{{ partial "date.html" . }}</li>
+        {{- range .Params.categories }}
+        {{- with $.Site.GetPage "taxonomyTerm" (printf "categories/%s" (urlize .)) }}
+        <li class="list-inline-item">
+            {{- partial "category-link-with-icon.html" . -}}
+        </li>
+        {{ end }}
+        {{ end }}
+    </ul>
+    <div class="pt-2">
+        {{ if .Params.featured_image }}
+        {{ $featured_image := (trim $featured_image "/") | absURL }}
+        <a href="{{.Permalink}}">
+            <img src="{{ $featured_image }}" class="img-fluid rounded" alt="image from {{ .Title }}">
+        </a>
+        {{ end }}
+        <div class="{{ if .Params.featured_image }}pt-4{{ end }}">
+            <div class="roboto text-dark">
+                {{ .Summary }}
+            </div>
+            <a href="{{.Permalink}}" class="text-decoration-none text-dark">Читать далее...</a>
+        </div>
+    </div>
+</article>

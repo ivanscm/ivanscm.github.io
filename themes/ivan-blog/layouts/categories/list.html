@@ -1,0 +1,12 @@
+{{ define "breadcrumb" }}
+    <li class="breadcrumb-item roboto font-weight-light"><a href="/posts/">Блог</a></li>
+    <li class="breadcrumb-item roboto font-weight-light active" aria-current="page">{{.Title}}</li>
+{{ end }}
+
+{{ define "main" }}
+    {{ $paginator := .Paginate (where .Pages "Type" "posts") }}
+    {{ range $paginator.Pages }}
+        {{ partial "summary-with-image.html" . }}
+    {{ end }}
+    {{- partial "pagination.html" . -}}
+{{ end }}

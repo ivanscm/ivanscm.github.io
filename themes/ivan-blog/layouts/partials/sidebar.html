@@ -1,0 +1,42 @@
+<a href="/" class="d-none d-sm-none d-md-block"><img src='{{ "photo.jpg" | absURL }}' class="img-thumbnail" alt="Фото Григорьева Ивана"></a>
+<div class="pt-2">
+    <div class="btn-group btn-group-sm" role="group" aria-label="Социальные сети">
+        {{ range $key, $val := .Site.Params.Social }}
+        <a class="btn btn-outline-light text-decoration-none text-dark" href="{{ $val }}" target="_blank">
+            <img src='{{ (printf "%s%s%s" "icons/social/" $key ".svg" ) | absURL }}' class="icon">
+        </a>
+        {{ end }}
+    </div>
+</div>
+<div class="pt-2">
+    <p class="roboto text-break small text-secondary"><img src="images/emoji/waving-hand_16.png" alt="👋" style="height: 18px; vertical-align: top;"/> {{ .Site.Params.about }}</p>
+</div>
+<div class="">
+    <p class="roboto text-break small text-secondary"><img src="images/emoji/briefcase_16.png" alt="💼" style="height: 18px; vertical-align: top;"/> {{ with .Site.Params.workline }}{{ . | markdownify | safeHTML }}{{ end }}</span>
+</div>
+<div class="pt-5">
+    <h3 class="roboto"><img src="images/emoji/pencil2.png" alt="✏ " style="height: 1.75rem; vertical-align: text-top;"/> Пишу о:</h3>
+    <ul class="list-unstyled">
+        {{ range .Site.Taxonomies.categories }}
+        <li><a href="{{ .Page.RelPermalink }}" class="text-decoration-none text-dark roboto"><img src="{{ .Page.Param "image" }}" alt="{{ .Page.Param "icon" }}" style="height: 18px; vertical-align: text-top"/>
+                {{ .Page.Param "prepositional" }}</a></li>
+        {{ end }}
+    </ul>
+</div>
+<div class="pt-5">
+    
+</div>
+<div class="pt-5">
+    <img class="hugo-logo" src='{{"hugo-logo-wide.svg"| absURL }}'>
+    <br />
+    <small class="roboto font-weight-light text-muted pb-5">Сайт использует <a href="https://gohugo.io/"
+            target="_blank">HUGO</a> и <a href="https://getbootstrap.com/" target="_blank">Bootstrap</a>. Хостинг <a
+            href="https://pages.github.com/" target="_blank">GitHub Pages</a>.</small>
+    <br />
+    <small class="roboto font-weight-light text-muted">Icon made by <a href="https://www.flaticon.com/authors/freepik"
+            target="_blank">Freepik</a> perfect from <a href="https://www.flaticon.com/"
+            target="_blank">www.flaticon.com</a>.</small>
+    <br />
+    <br />
+    Связь со мной: <a href="mailto:ivanscm@yandex.ru">ivanscm@yandex.ru</a>
+</div>

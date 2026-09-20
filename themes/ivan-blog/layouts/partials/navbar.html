@@ -1,0 +1,22 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+    <div class="container">
+        <a class="navbar-brand roboto" href="/">
+            <img src="{{ "favicon-32x32.png" | absURL }}" width="30" height="30" class="d-inline-block align-top"
+                alt="</>">
+            {{ .Site.Title }}</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+            <ul class="navbar-nav">
+                {{ $currentPage := . }}
+                {{ range .Site.Menus.main }}
+                    <li class="nav-item roboto text-white">
+                        <a class="nav-link {{ if $currentPage.IsMenuCurrent "main" . }}active{{end}}" href="{{ .URL }}">{{ .Name }}</a>
+                    </li>
+                {{ end }}
+            </ul>
+        </div>
+    </div>
+</nav>

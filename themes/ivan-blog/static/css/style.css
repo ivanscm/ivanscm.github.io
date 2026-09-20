@@ -1,0 +1,27 @@
+.roboto {
+    font-family: 'Roboto', sans-serif !important;
+}
+
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: 400;
+    line-height: 1.2;
+}
+
+.icon {
+    height: 14px;
+}
+
+.hugo-logo {
+    height: 20px;
+}

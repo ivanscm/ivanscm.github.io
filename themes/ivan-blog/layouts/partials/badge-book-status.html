@@ -1,0 +1,12 @@
+{{ $allowedStatuses := slice "wishlist" "readed" "waiting" }}
+{{ if and (.Params.status) (in $allowedStatuses .Params.status) }}
+    {{ if eq .Params.status "wishlist"}}
+        <span class="badge badge-secondary">В списке желаний</span>
+    {{ end }}
+    {{ if eq .Params.status "waiting"}}
+        <span class="badge badge-info">В очереди на прочтение</span>
+    {{ end }}
+    {{ if eq .Params.status "readed"}}
+        <span class="badge badge-success">Прочитано</span>
+    {{ end }}
+{{ end }}

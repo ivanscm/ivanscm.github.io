@@ -1,0 +1,61 @@
+{{ define "breadcrumb" }}
+    <li class="breadcrumb-item roboto font-weight-light"><a href="/posts/">Блог</a></li>
+    <li class="breadcrumb-item roboto font-weight-light active" aria-current="page">{{.Title}}</li>
+{{ end }}
+
+{{ define "main" }}
+<article class="pb-2">
+    <h2 class="roboto text-dark article-title">{{.Title}}</h2>
+    <ul class="list-inline">
+        <li class="list-inline-item roboto font-weight-light">{{ partial "date.html" . }}</li>
+        {{- range .Params.categories }}
+            {{- with $.Site.GetPage "taxonomyTerm" (printf "categories/%s" (urlize .)) }}
+            <li class="list-inline-item">
+                {{- partial "category-link-with-icon.html" . -}}
+            </li>
+            {{ end }}
+        {{ end }}
+    </ul>
+    <div class="pt-2">
+        {{ $featured_image := .Params.featured_image }}
+        {{ if $featured_image }}
+            {{ $featured_image := (trim $featured_image "/") | absURL }}
+            <img src="{{ $featured_image }}" class="img-fluid rounded" alt="image from {{ .Title }}">
+        {{ end }}
+        <div class="{{ if $featured_image }}pt-4{{ end }}">
+            <div class="roboto text-dark article-content">
+                {{ .Content }}
+            </div>
+        </div>
+    </div>
+</article>
+<div class="pb-2"> Поделиться:
+    <script src="https://yastatic.net/es5-shims/0.0.2/es5-shims.min.js"></script>
+    <script src="https://yastatic.net/share2/share.js"></script>
+    <div class="ya-share2" data-services="telegram,twitter,lj,facebook,vkontakte,pocket">
+    </div>
+</div>
+<hr />
+<div class="pt-5">
+    <div id="disqus_thread"></div>
+    <script type="application/javascript">
+        window.disqus_config = function () {
+        
+        
+        
+        };
+        (function() {
+            if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+                document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+                return;
+            }
+            var d = document, s = d.createElement('script'); s.async = true;
+            s.src = '//' + "ivanscm" + '.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+{{ end }}
